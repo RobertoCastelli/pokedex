@@ -28,7 +28,7 @@ async function searchPokemon() {
     key = parseInt(pokeID.innerText);
     }
     catch(error) {
-        pokeName.innerText = ('poke not found!');
+        pokeName.innerText = ('not found!');
         console.log(error);
     }
 }
