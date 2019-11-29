@@ -1,22 +1,28 @@
-let pokedex = document.querySelector('.images');
+let pokedex = document.querySelector('.panel');
 let screen = document.getElementById('poke-image');
 
 let api = 'https://pokeapi.co/api/v2/pokemon';
 let key = Math.round(Math.random() * 150);
 
-function gatherPokemon() {
-    fetch(`${api}/${key}`)
-        .then(response =>  response.json()
-        .then(pokemon => getPokemon(pokemon))
-    );
+gatherPokemon()
+
+//GET POKEMON INFO
+async function gatherPokemon() {
+    try {
+        let response = await fetch(`${api}/${key}`);
+        let data = await response.json();
+        getPokemon(data);
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 function getPokemon(pokemon) {
     screen.src = pokemon.sprites.front_default;
+    console.log(pokemon.name)
 }
 
-gatherPokemon();
 
-    
 // GET COORDINATE 
 function coordinates(event) {
     let xCoordinate = event.offsetX;
