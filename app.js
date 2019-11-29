@@ -25,6 +25,7 @@ async function searchPokemon() {
     let response = await fetch(`${api}/${key}`);
     let data = await response.json();
     getPokemon(data);
+    key = parseInt(pokeID.innerText);
     }
     catch(error) {
         pokeName.innerText = ('poke not found!');
@@ -33,9 +34,12 @@ async function searchPokemon() {
 }
 
 btnSearch.addEventListener('click', () => {
-   key = pokeInput.value.toLowerCase();
-   searchPokemon();
-    
+    if (pokeInput.value == '') { 
+    pokeName.innerText = 'Zzz... name?'
+    } else {
+    key = pokeInput.value.toLowerCase();
+    searchPokemon();
+    }
 })
 
 btnRight.addEventListener('click', () => {
@@ -79,7 +83,7 @@ btnSwitch.addEventListener('click', () => {
 
 function getPokemon(pokemon) {
     screen.src = pokemon.sprites.front_default;
-    pokeName.innerText = `${pokemon.name}`;
+    pokeName.innerText = `${pokemon.name}`.toUpperCase();
     pokeID.innerText = pokemon.id < 10 ? `0${pokemon.id}`:`${pokemon.id}`
     infoType.innerText = `type: ${pokemon.types[0].type.name}`;
     infoHP.innerText = `health: ${pokemon.stats[5].stat.name, pokemon.stats[5].base_stat}`;
