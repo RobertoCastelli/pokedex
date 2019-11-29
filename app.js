@@ -1,3 +1,9 @@
+/*
+ * TODO
+ * Sistemare ricerca dopo not found
+ * Sistemare tasto Up - Down
+*/
+
 let screen = document.getElementById('poke-image');
 
 let btnSearch = document.getElementById('btnSearch');
