@@ -1,16 +1,31 @@
 let pokedex = document.querySelector('.panel');
 let screen = document.getElementById('poke-image');
 let btnSearch = document.getElementById('btnSearch');
+let btnRight = document.getElementById('btnRight');
+let btnLeft = document.getElementById('btnLeft');
 
+let key = 1;
 
-btnSearch.addEventListener('click', async () => {
+async function searchPokemon() {
     let api = 'https://pokeapi.co/api/v2/pokemon';
-    let key = Math.round(Math.random() * 150);
     let response = await fetch(`${api}/${key}`);
     let data = await response.json();
     getPokemon(data);
 }
-);
+
+btnSearch.addEventListener('click', () => {
+    console.log('IN PROGRESS')
+});
+
+btnRight.addEventListener('click', () => {
+    key += 1
+    searchPokemon();
+});
+
+btnLeft.addEventListener('click', () => {
+    key -= 1
+    searchPokemon();
+});
 
 function getPokemon(pokemon) {
     screen.src = pokemon.sprites.front_default;

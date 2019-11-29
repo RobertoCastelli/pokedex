@@ -26,6 +26,14 @@ footer {
     left: 21%;
 }
 
+button {
+    outline: none !important;
+    border: none;
+    background: none;
+    color: #333333;
+}
+
+
 #poke-name {
     position: absolute;
     top: 30%;
@@ -45,63 +53,45 @@ footer {
     position: absolute;
     top: 162%;
     left: 5%;
-    width: 180px;
+    width: 50%;
 }
 
 #btnSwitch {
     position: absolute;
     top: 121%;
-    left: 7%;
-    outline: none;
-    border: none;
-    background: none;
+    left: 7.5%;
 }
 
 #btnRight {
     position: absolute;
-    top: 141%;
+    top: 142%;
     left: 80%;
-    outline: none;
-    border: none;
-    background: none;
 }
 
 #btnUp {
     position: absolute;
     top: 132%;
     left: 70.5%;
-    outline: none;
-    border: none;
-    background: none;
 }
 
 #btnDown {
     position: absolute;
     top: 150.5%;
     left: 70.5%;
-    outline: none;
-    border: none;
-    background: none;
 }
 
 #btnLeft {
     position: absolute;
-    top: 141%;
+    top: 142%;
     left: 63%;
-    outline: none;
-    border: none;
-    background: none;
 }
 
 #btnSearch {
     position: absolute;
-    top: 140%;
+    top: 141%;
     left: 28%;
     font-weight: bold;
     font-size: larger;
-    outline: none;
-    border: none;
-    background: none;
 }
 
 #btnSearch:active {
