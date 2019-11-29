@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+    <!-- FONTAWSOME -->
+    <script src="https://kit.fontawesome.com/dcf7aaaa52.js" crossorigin="anonymous"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
     <title>Pokedex</title>
@@ -18,9 +21,24 @@
 <body>
     <div class="container">
         <div class="panel">
+            <h6 id="poke-name">name:</h6>
+            <div class="poke-info">
+                <h6>type:</h6>
+                <h6>hp:</h6>
+                <h6>sp:</h6>
+                <h6>atk:</h6>
+                <h6>def:</h6>
+            </div>
+
+            <input id="poke-input" type="text" placeholder="search pokemon">
             <img id="pokedex" src="img/bg.jpg" alt="pokedex">
             <img id="poke-image" src="#" alt="poke-image">
             <button id="btnSearch">SEARCH</button>
+            <button id="btnRight"><i class="fas fa-caret-right fa-2x"></i></button>
+            <button id="btnLeft"><i class="fas fa-caret-left fa-2x"></i></button>
+            <button id="btnUp"><i class="fas fa-caret-up fa-2x"></i></button>
+            <button id="btnDown"><i class="fas fa-caret-down fa-2x"></i></button>
+            <button id="btnSwitch"><i class="fas fa-power-off"></i></button>
         </div>
 
 

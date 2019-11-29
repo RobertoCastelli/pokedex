@@ -8,8 +8,8 @@ footer {
 }    
 
 .container {
-    max-width: 370px;
-}
+    max-width: 350px;
+}   
 
 .panel {
     position: relative;
@@ -20,18 +20,82 @@ footer {
     width: 350px;
 }
 
+.poke-info {
+    position: absolute;
+    top: 56%;
+    left: 21%;
+}
+
+#poke-name {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+}
+
 #poke-image { /*bottom 150% - left 32% */
     position: absolute;
     border-radius: 10%;
     border: 2px solid black;
     background-color: white;
-    top: 200px;
-    left: 23%;    
+    top: 162%;
+    left: 60%;    
+}
+
+#poke-input {
+    position: absolute;
+    top: 162%;
+    left: 5%;
+    width: 180px;
+}
+
+#btnSwitch {
+    position: absolute;
+    top: 121%;
+    left: 7%;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+#btnRight {
+    position: absolute;
+    top: 141%;
+    left: 80%;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+#btnUp {
+    position: absolute;
+    top: 132%;
+    left: 70.5%;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+#btnDown {
+    position: absolute;
+    top: 150.5%;
+    left: 70.5%;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+#btnLeft {
+    position: absolute;
+    top: 141%;
+    left: 63%;
+    outline: none;
+    border: none;
+    background: none;
 }
 
 #btnSearch {
     position: absolute;
-    top:147px;
+    top: 140%;
     left: 28%;
     font-weight: bold;
     font-size: larger;
