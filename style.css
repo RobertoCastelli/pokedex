@@ -126,10 +126,6 @@ input {
 
 #btnSearch:active,
 #btnSwitch:active,
-#btnUp:active,
-#btnDown:active,
-#btnRight:active,
-#btnLeft:active
  {
     transform: scale(1.1);
 }

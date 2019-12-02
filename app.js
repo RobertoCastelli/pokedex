@@ -1,7 +1,7 @@
 /*
  * TODO
- * Sistemare tasto Up - Down
  * mettere easter egg
+ * sistemare search
  * metter sound
 */
 
@@ -23,24 +23,32 @@ let infoSP = document.getElementById('info-sp');
 let infoATK = document.getElementById('info-atk');
 let infoDEF = document.getElementById('info-def');
 
-let key = 0;
+let index = 0;
+let evoPhase = 0;
 
-
-async function searchPokemonEvolutions() {
+async function searchPokemon(num) {
     try {
+        if (index <= 0) init();
         let apiEvo = 'https://pokeapi.co/api/v2/evolution-chain';
-        let responseEvo = await fetch(`${apiEvo}/${key}`);
+        let responseEvo = await fetch(`${apiEvo}/${index}`);
         let dataEvo = await responseEvo.json();
 
-        let evo0 = dataEvo.chain.species.name;
-        let evo1 = dataEvo.chain.evolves_to[0].species.name;
-        let evo2 = dataEvo.chain.evolves_to[0].evolves_to[0].species.name;
-     
-        displayPokemonEvo(evo0);
-        searchPokemonInfo(evo0);
+        switch (num) {
+            case 0:
+                evo = dataEvo.chain.species.name;
+                break;
+            case 1:
+                evo = dataEvo.chain.evolves_to[0].species.name;
+                break;
+            case 2:
+                evo = dataEvo.chain.evolves_to[0].evolves_to[0].species.name;    
+                break;
+        }
+
+         searchPokemonInfo(evo);
     }
     catch(error) {
-        console.log(error);
+        console.log(error, 'Index < 0')
     }
 }
 
@@ -54,55 +62,13 @@ async function searchPokemonInfo(pokemonName) {
     }
     catch(error) {
         pokeName.innerText = ('not found!');
-        key = parseInt(pokeID.innerText);
+        index = parseInt(pokeID.innerText);
         console.log(error);
     }
 }
 
-// // RELOAD APP
-// btnSwitch.addEventListener('click', () => {
-//     window.location.reload();
-// })
-
-// // SEARCH POKEMON
-// btnSearch.addEventListener('click', () => {
-//     if (pokeInput.value == '') { 
-//     pokeName.innerText = 'Zzz... name?'
-//     } else {
-//     key = pokeInput.value.toLowerCase();
-//     searchPokemon();
-//     }
-// })
-
-// SCROLL POKEMON LIST -->
-btnRight.addEventListener('click', () => {
-    key += 1;
-    searchPokemonEvolutions();
-   
-})
-
-// SCROLL POKEMON LIST <--
-btnLeft.addEventListener('click', () => {
-    key -= 1;
-    searchPokemonEvolutions(0);
-})
-
-// UP 
-// btnUp.addEventListener('click', () => {
-//     searchPokemonEvolutions();
-// })
-
-// // DOWN 
-// btnDown.addEventListener('click', () => {
-
-// })
-
-// POPULATE POKEMON INFO + IMAGE
-function displayPokemonEvo(pokemonEvolution) {
-    pokeName.innerText = pokemonEvolution.toUpperCase();
-}
-
 function displayPokemonInfo(pokemonInfo) {
+    pokeName.innerText = pokemonInfo.name.toUpperCase();
     screen.src = pokemonInfo.sprites.front_default;
     pokeID.innerText = pokemonInfo.id < 10 ? `0${pokemonInfo.id}`:`${pokemonInfo.id}`
     infoType.innerText = `type: ${pokemonInfo.types[0].type.name}`;
@@ -111,5 +77,64 @@ function displayPokemonInfo(pokemonInfo) {
     infoATK.innerText = `attack: ${pokemonInfo.stats[3].stat.name, pokemonInfo.stats[3].base_stat}`;
     infoDEF.innerText = `defence: ${pokemonInfo.stats[4].stat.name, pokemonInfo.stats[4].base_stat}`;  
 }
+
+// RELOAD APP
+btnSwitch.addEventListener('click', () => {
+    init();
+})
+
+// SEARCH POKEMON
+btnSearch.addEventListener('click', () => {
+    if (pokeInput.value == '') { 
+        pokeName.innerText = 'Zzz... name?'
+    } else {
+        pokemonName = pokeInput.value.toLowerCase();
+        searchPokemonInfo(pokemonName);
+        index = parseInt(pokeID.innerText);
+
+    }
+})
+
+// RESET
+function init() {
+    index = 0;
+    pokeName.innerText = 'Who am I?';
+    pokeID.innerText = '00';
+    infoType.innerText = 'type: ethernal';
+    infoHP.innerText = 'health: ehm...I\'m ethernal';
+    infoSP.innerText = 'speed: no thanks';
+    infoATK.innerText = 'attack: bogey power shot';
+    infoDEF.innerText = 'defence: armpits aura';
+    screen.src= 'img/bras.png';
+}
+
+// SCROLL POKEMON LIST -->
+btnRight.addEventListener('click', () => {
+    index += 1;
+    evoPhase = 0;
+    searchPokemon(0);
+})
+
+// SCROLL POKEMON LIST <--
+btnLeft.addEventListener('click', () => {
+    index -= 1;   
+    evoPhase = 0;
+    searchPokemon(0);
+})
+
+// CHAIN EVOLUTION UP 
+btnUp.addEventListener('click', () => {
+    evoPhase >= 2 ? evoPhase = 2 : evoPhase +=1;
+    searchPokemon(evoPhase);
+})
+
+// CHAIN EVOLUTION DOWN
+btnDown.addEventListener('click', () => {
+    evoPhase <= 0 ? evoPhase = 0 : evoPhase -=1;
+    searchPokemon(evoPhase);
+})
+
+
+
 
 
