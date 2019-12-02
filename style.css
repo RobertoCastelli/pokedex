@@ -67,8 +67,8 @@ input {
 #btnSearch {
     position: absolute;
     top: 70%;
-    left: 33%;
-    color: green;
+    left: 32%;
+    color: black;
 }
 
 .info {
@@ -124,8 +124,14 @@ input {
     color: burlywood;
 }
 
-#btnSearch:active,
 #btnSwitch:active,
- {
+#btnSearch:active {
     transform: scale(1.1);
+}
+
+#btnSearch img {
+    width: 35px;
+    position: absolute;
+    top: 73%;
+    left: 20%;
 }

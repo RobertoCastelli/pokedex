@@ -100,11 +100,11 @@ function init() {
     index = 0;
     pokeName.innerText = 'Who am I?';
     pokeID.innerText = '00';
-    infoType.innerText = 'type: ethernal';
-    infoHP.innerText = 'health: ehm...I\'m ethernal';
-    infoSP.innerText = 'speed: no thanks';
-    infoATK.innerText = 'attack: bogey power shot';
-    infoDEF.innerText = 'defence: armpits aura';
+    infoType.innerText = '';
+    infoHP.innerText = '';
+    infoSP.innerText = '';
+    infoATK.innerText = '';
+    infoDEF.innerText = '';
     screen.src= 'img/bras.png';
 }
 
