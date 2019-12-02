@@ -2,10 +2,12 @@
  * TODO
  * mettere easter egg
  * sistemare search
+ * sistemare bug quando c' solo 1 evo
  * metter sound
 */
 
 let screen = document.getElementById('poke-image');
+let audio = document.getElementById('audio');
 
 let btnSearch = document.getElementById('btnSearch');
 let btnRight = document.getElementById('btnRight');
@@ -25,6 +27,30 @@ let infoDEF = document.getElementById('info-def');
 
 let index = 0;
 let evoPhase = 0;
+
+init();
+
+// RESET
+function init() {
+    index = 0;
+    
+    audio.pause();
+    audio.currentTime = 0;
+
+    pokeName.innerText = 'Who am I?';
+    pokeID.innerText = '00';
+    infoType.innerText = '';
+    infoHP.innerText = '';
+    infoSP.innerText = '';
+    infoATK.innerText = '';
+    infoDEF.innerText = '';
+    screen.src= 'img/bras.png';
+    pokeInput.value = '';
+
+    btnLeft.style.color = 'grey'
+    btnUp.style.color = 'grey'
+    btnDown.style.color = 'grey'
+}
 
 async function searchPokemon(num) {
     try {
@@ -48,6 +74,7 @@ async function searchPokemon(num) {
          searchPokemonInfo(evo);
     }
     catch(error) {
+      
         console.log(error, 'Index < 0')
     }
 }
@@ -57,7 +84,6 @@ async function searchPokemonInfo(pokemonName) {
         let api = 'https://pokeapi.co/api/v2/pokemon';
         let response = await fetch(`${api}/${pokemonName}`);
         let data = await response.json();
-        
         displayPokemonInfo(data);
     }
     catch(error) {
@@ -87,32 +113,35 @@ btnSwitch.addEventListener('click', () => {
 btnSearch.addEventListener('click', () => {
     if (pokeInput.value == '') { 
         pokeName.innerText = 'Zzz... name?'
+    } else if (pokeInput.value == 'praseidimio' || pokeInput.value == 'tremotino' ) {
+        pokeName.innerText = 'EASTER EGG!';
+        audio.play();
     } else {
         pokemonName = pokeInput.value.toLowerCase();
         searchPokemonInfo(pokemonName);
-        index = parseInt(pokeID.innerText);
-
+        index = 0;
+        btnUp.style.color = 'grey';
+        btnDown.style.color = 'grey';
+        btnLeft.style.color = 'grey';
+        btnUp.disabled = true;
+        btnDown.disabled = true;
+        btnLeft.disabled = true;
     }
 })
-
-// RESET
-function init() {
-    index = 0;
-    pokeName.innerText = 'Who am I?';
-    pokeID.innerText = '00';
-    infoType.innerText = '';
-    infoHP.innerText = '';
-    infoSP.innerText = '';
-    infoATK.innerText = '';
-    infoDEF.innerText = '';
-    screen.src= 'img/bras.png';
-}
 
 // SCROLL POKEMON LIST -->
 btnRight.addEventListener('click', () => {
     index += 1;
     evoPhase = 0;
     searchPokemon(0);
+
+    pokeInput.value = '';
+    btnLeft.style.color = 'burlywood';
+    btnUp.style.color = 'burlywood';
+    btnDown.style.color = 'burlywood';
+    btnUp.disabled = false;
+        btnDown.disabled = false;
+        btnLeft.disabled = false;
 })
 
 // SCROLL POKEMON LIST <--
@@ -124,17 +153,20 @@ btnLeft.addEventListener('click', () => {
 
 // CHAIN EVOLUTION UP 
 btnUp.addEventListener('click', () => {
-    evoPhase >= 2 ? evoPhase = 2 : evoPhase +=1;
+    if(evoPhase >= 2) { 
+        evoPhase = 2;
+    } else {
+        evoPhase +=1;
+    }
     searchPokemon(evoPhase);
 })
 
 // CHAIN EVOLUTION DOWN
 btnDown.addEventListener('click', () => {
-    evoPhase <= 0 ? evoPhase = 0 : evoPhase -=1;
+    if (evoPhase <= 0) {
+        evoPhase = 0;
+    } else { 
+        evoPhase -=1 
+    }
     searchPokemon(evoPhase);
 })
-
-
-
-
-
