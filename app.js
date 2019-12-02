@@ -33,9 +33,6 @@ init();
 // RESET
 function init() {
     index = 0;
-    
-    audio.pause();
-    audio.currentTime = 0;
 
     pokeName.innerText = 'Who am I?';
     pokeID.innerText = '00';
@@ -115,7 +112,6 @@ btnSearch.addEventListener('click', () => {
         pokeName.innerText = 'Zzz... name?'
     } else if (pokeInput.value == 'praseidimio' || pokeInput.value == 'tremotino' ) {
         pokeName.innerText = 'EASTER EGG!';
-        audio.play();
     } else {
         pokemonName = pokeInput.value.toLowerCase();
         searchPokemonInfo(pokemonName);
