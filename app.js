@@ -1,13 +1,12 @@
 /*
  * TODO
  * mettere easter egg
- * sistemare search
  * sistemare bug quando c' solo 1 evo
- * metter sound
 */
 
 let screen = document.getElementById('poke-image');
 let audio = document.getElementById('audio');
+let buttons = document.querySelectorAll('button');
 
 let btnSearch = document.getElementById('btnSearch');
 let btnRight = document.getElementById('btnRight');
@@ -47,6 +46,9 @@ function init() {
     btnLeft.style.color = 'grey'
     btnUp.style.color = 'grey'
     btnDown.style.color = 'grey'
+    btnUp.disabled = true;
+    btnDown.disabled = true;
+    btnLeft.disabled = true;
 }
 
 // API FOR POKEMON NAME (BASE + EVOLUTION)
@@ -113,8 +115,14 @@ btnSearch.addEventListener('click', () => {
     if (pokeInput.value == '') {
         pokeName.innerText = 'Zzz... name?'
     } else if (pokeInput.value == 'praseidimio' || pokeInput.value == 'tremotino') {
-        pokeName.innerText = 'BLENDER!!! :)';
+        pokeName.innerText = 'Erica BLENDER!';
+        screen.src = 'img/blender.png'
         btnLeft.style.color = 'burlywood';
+        btnUp.style.color = 'grey';
+        btnDown.style.color = 'grey';
+        btnUp.disabled = true;
+        btnDown.disabled = true;
+        btnLeft.disabled = false;
     } else {
         pokemonName = pokeInput.value.toLowerCase();
         searchPokemonInfo(pokemonName);
@@ -168,4 +176,9 @@ btnDown.addEventListener('click', () => {
         evoPhase -= 1
     }
     searchPokemon(evoPhase);
+})
+
+// CLICK SOUND ON BUTTON
+buttons.forEach(element => {
+    element.addEventListener('click', () => audio.play());
 })
