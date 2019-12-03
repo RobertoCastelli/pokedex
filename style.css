@@ -54,6 +54,7 @@ input {
     top: 27%;
     left: 28%;    
     width: 150px;
+    height: auto;
     padding-top: 5px;
 }
 

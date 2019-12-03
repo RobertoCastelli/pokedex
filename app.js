@@ -41,7 +41,7 @@ function init() {
     infoSP.innerText = '';
     infoATK.innerText = '';
     infoDEF.innerText = '';
-    screen.src= 'img/bras.png';
+    screen.src = 'img/bras.png';
     pokeInput.value = '';
 
     btnLeft.style.color = 'grey'
@@ -49,6 +49,7 @@ function init() {
     btnDown.style.color = 'grey'
 }
 
+// API FOR POKEMON NAME (BASE + EVOLUTION)
 async function searchPokemon(num) {
     try {
         if (index <= 0) init();
@@ -64,18 +65,18 @@ async function searchPokemon(num) {
                 evo = dataEvo.chain.evolves_to[0].species.name;
                 break;
             case 2:
-                evo = dataEvo.chain.evolves_to[0].evolves_to[0].species.name;    
+                evo = dataEvo.chain.evolves_to[0].evolves_to[0].species.name;
                 break;
         }
-
-         searchPokemonInfo(evo);
+        searchPokemonInfo(evo);
     }
-    catch(error) {
-      
+    catch (error) {
+
         console.log(error, 'Index < 0')
     }
 }
 
+// API FOR POKEMON STATS
 async function searchPokemonInfo(pokemonName) {
     try {
         let api = 'https://pokeapi.co/api/v2/pokemon';
@@ -83,22 +84,23 @@ async function searchPokemonInfo(pokemonName) {
         let data = await response.json();
         displayPokemonInfo(data);
     }
-    catch(error) {
+    catch (error) {
         pokeName.innerText = ('not found!');
         index = parseInt(pokeID.innerText);
         console.log(error);
     }
 }
 
+// DISPLAY POKEMON STATS
 function displayPokemonInfo(pokemonInfo) {
     pokeName.innerText = pokemonInfo.name.toUpperCase();
     screen.src = pokemonInfo.sprites.front_default;
-    pokeID.innerText = pokemonInfo.id < 10 ? `0${pokemonInfo.id}`:`${pokemonInfo.id}`
+    pokeID.innerText = pokemonInfo.id < 10 ? `0${pokemonInfo.id}` : `${pokemonInfo.id}`
     infoType.innerText = `type: ${pokemonInfo.types[0].type.name}`;
     infoHP.innerText = `health: ${pokemonInfo.stats[5].stat.name, pokemonInfo.stats[5].base_stat}`;
     infoSP.innerText = `speed: ${pokemonInfo.stats[0].stat.name, pokemonInfo.stats[0].base_stat}`;
     infoATK.innerText = `attack: ${pokemonInfo.stats[3].stat.name, pokemonInfo.stats[3].base_stat}`;
-    infoDEF.innerText = `defence: ${pokemonInfo.stats[4].stat.name, pokemonInfo.stats[4].base_stat}`;  
+    infoDEF.innerText = `defence: ${pokemonInfo.stats[4].stat.name, pokemonInfo.stats[4].base_stat}`;
 }
 
 // RELOAD APP
@@ -108,10 +110,11 @@ btnSwitch.addEventListener('click', () => {
 
 // SEARCH POKEMON
 btnSearch.addEventListener('click', () => {
-    if (pokeInput.value == '') { 
+    if (pokeInput.value == '') {
         pokeName.innerText = 'Zzz... name?'
-    } else if (pokeInput.value == 'praseidimio' || pokeInput.value == 'tremotino' ) {
-        pokeName.innerText = 'EASTER EGG!';
+    } else if (pokeInput.value == 'praseidimio' || pokeInput.value == 'tremotino') {
+        pokeName.innerText = 'BLENDER!!! :)';
+        btnLeft.style.color = 'burlywood';
     } else {
         pokemonName = pokeInput.value.toLowerCase();
         searchPokemonInfo(pokemonName);
@@ -136,23 +139,23 @@ btnRight.addEventListener('click', () => {
     btnUp.style.color = 'burlywood';
     btnDown.style.color = 'burlywood';
     btnUp.disabled = false;
-        btnDown.disabled = false;
-        btnLeft.disabled = false;
+    btnDown.disabled = false;
+    btnLeft.disabled = false;
 })
 
 // SCROLL POKEMON LIST <--
 btnLeft.addEventListener('click', () => {
-    index -= 1;   
+    index -= 1;
     evoPhase = 0;
     searchPokemon(0);
 })
 
 // CHAIN EVOLUTION UP 
 btnUp.addEventListener('click', () => {
-    if(evoPhase >= 2) { 
+    if (evoPhase >= 2) {
         evoPhase = 2;
     } else {
-        evoPhase +=1;
+        evoPhase += 1;
     }
     searchPokemon(evoPhase);
 })
@@ -161,8 +164,8 @@ btnUp.addEventListener('click', () => {
 btnDown.addEventListener('click', () => {
     if (evoPhase <= 0) {
         evoPhase = 0;
-    } else { 
-        evoPhase -=1 
+    } else {
+        evoPhase -= 1
     }
     searchPokemon(evoPhase);
 })
